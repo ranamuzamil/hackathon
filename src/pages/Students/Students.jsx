@@ -12,6 +12,9 @@ const Students = () => {
   const [sName, setSName] = useState("");
   const [sid, setSid] = useState("");
   const [contact, setContact] = useState("");
+  const [setAllStudents] = useState("")
+
+
 
   const [students, setStudents] = useState([]);
 
@@ -27,16 +30,29 @@ const Students = () => {
   useEffect(()=>{
     fetchData();
   })
-
- 
-  const handleDelete = async (id) => {
-    const taskDocRef = doc(db, 'courses', id)
+  // const data = ""
+  
+  
+  
+  const handleDelete = async (product) => {
     try{
-      await deleteDoc(taskDocRef)
+      await deleteDoc(doc(db, "students", product.id));
+      let documentsAfterDelete = students.filter(doc => doc.id !== product.id)
+      setAllStudents(documentsAfterDelete)
+      setStudents(documentsAfterDelete)
+      console.log(product.id);
+
+
     } catch (err) {
-      alert(err)
+      console.error(err)
+
     }
   }
+
+
+
+
+
   const handleUpdate = () =>{
 
   }
@@ -49,6 +65,7 @@ const Students = () => {
         sid: sid,
         contact: contact,
         created: Timestamp.now(),
+        id: Math.random().toString(32).slice(2)
       });
     } catch (err) {
       alert(err);
@@ -102,7 +119,7 @@ const Students = () => {
                                 </button>
                                 <button
                                   className="button text-red-50 bg-red-600"
-                                  onClick={()=>{handleDelete(product.id)}}
+                                  onClick={()=>{handleDelete(product)}}
                                 >
                                   Delete
                                 </button>
