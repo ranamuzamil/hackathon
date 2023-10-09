@@ -50,7 +50,7 @@ const Attendance = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="mx-auto">
+      <div className="flex flex-col ml-80 w-2/3">
         {attendance.length > 0 ? (
           <div className="table-responsive">
             <table className="table table-light table-striped">
@@ -88,7 +88,7 @@ const Attendance = () => {
 
         <hr />
 
-        <h2 className="text-center"> Attendance</h2>
+        <h2 className="">Students List </h2>
        
 
 
